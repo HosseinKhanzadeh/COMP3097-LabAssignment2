@@ -35,11 +35,4 @@ Building and running this project requires **Xcode on macOS** (not verifiable fr
 2. Select an **iPhone Simulator** (or a device).  
 3. Run (**⌘R**).
 
-## Submission
-
-- **GitHub:** submit your repository URL as required by the course.  
-- **D2L:** zip the project folder and upload as instructed (exclude `DerivedData` / build folders if your zip tool allows).
-
----
-
 *Student project — COMP-3097 Lab Assignment 2.*
