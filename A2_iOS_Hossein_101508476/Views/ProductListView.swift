@@ -1,6 +1,7 @@
 import SwiftUI
 import CoreData
 
+// Full list with manual fetches so we can attach a search predicate without replacing the whole view model.
 struct ProductListView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -82,6 +83,7 @@ struct ProductListView: View {
             }
         }
         .onAppear(perform: refreshProducts)
+        // Re-run fetch whenever the search string changes (including clear).
         .onChange(of: searchText) { _, _ in
             refreshProducts()
         }
@@ -173,6 +175,7 @@ struct ProductListView: View {
         .subtleBorderedSurface(cornerRadius: AppTheme.Radius.md)
     }
 
+    // Re-query Core Data: total count for the header, then sorted rows filtered by trimmed search text when needed.
     private func refreshProducts() {
         let countRequest = Product.fetchRequest()
         let total = (try? viewContext.count(for: countRequest)) ?? 0
@@ -182,6 +185,7 @@ struct ProductListView: View {
         let request = Product.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Product.productId, ascending: true)]
         if !trimmedSearch.isEmpty {
+            // Case-insensitive substring match on name or description (same term for both fields).
             request.predicate = NSPredicate(
                 format: "(name CONTAINS[cd] %@) OR (productDescription CONTAINS[cd] %@)",
                 trimmedSearch,

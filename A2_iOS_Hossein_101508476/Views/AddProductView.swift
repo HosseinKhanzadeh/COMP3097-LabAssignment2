@@ -1,6 +1,7 @@
 import SwiftUI
 import CoreData
 
+// Add form: validates required fields and price, then inserts a `Product` and saves the shared context.
 struct AddProductView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) private var dismiss
@@ -182,6 +183,7 @@ struct AddProductView: View {
     private func saveProduct() {
         validationMessage = nil
 
+        // Required string fields (trimmed); price parsed separately so commas/decimals can be validated.
         let idTrim = productId.trimmingCharacters(in: .whitespacesAndNewlines)
         let nameTrim = name.trimmingCharacters(in: .whitespacesAndNewlines)
         let descTrim = productDescription.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -209,6 +211,7 @@ struct AddProductView: View {
             return
         }
 
+        // Insert and persist; on failure, delete the unsaved object so the context stays consistent.
         let product = Product(context: viewContext)
         product.productId = idTrim
         product.name = nameTrim
@@ -225,6 +228,7 @@ struct AddProductView: View {
         }
     }
 
+    // Accepts plain decimals or comma as decimal separator; empty input is invalid for save.
     private func parsePrice(_ raw: String) -> Double? {
         let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed.isEmpty {

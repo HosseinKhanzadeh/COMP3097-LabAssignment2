@@ -1,11 +1,14 @@
 import CoreData
 
 enum ProductSeeder {
+    // Inserts bundled demo products only when the store has no `Product` rows, so user saves are never overwritten.
     static func seedIfNeeded(context: NSManagedObjectContext) {
         let request = Product.fetchRequest()
         request.fetchLimit = 1
+        // Cheap existence check: any row means we keep the current database as-is.
         guard let count = try? context.count(for: request), count == 0 else { return }
 
+        // Fixed tuples (id, name, description, price, provider) — lab sample data for a non-empty first launch.
         let rows: [(String, String, String, Double, String)] = [
             (
                 "PRD-1001",

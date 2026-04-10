@@ -1,7 +1,9 @@
 import SwiftUI
 import CoreData
 
+// Home: one “current” product from the sorted list; Previous/Next move `selectedIndex` along that ordering.
 struct ContentView: View {
+    // Same sort as the list screen (by productId) so navigation order matches everywhere.
     @FetchRequest(
         fetchRequest: {
             let request = Product.fetchRequest()
@@ -12,9 +14,11 @@ struct ContentView: View {
     )
     private var products: FetchedResults<Product>
 
+    // Which row in `products` the large card shows; clamped below when the list changes size.
     @State private var selectedIndex = 0
     @State private var showingAddProduct = false
 
+    // Safe index into `products` after inserts/deletes (empty list still maps to 0 for layout math).
     private var validSelectedIndex: Int {
         let n = products.count
         guard n > 0 else { return 0 }
@@ -35,6 +39,7 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
                     homeHeader
 
+                    // Nothing to browse: show guidance instead of Prev/Next.
                     if products.isEmpty {
                         EmptyStateCard(
                             icon: "cube.transparent",
@@ -88,6 +93,7 @@ struct ContentView: View {
             .onAppear {
                 clampSelectedIndex()
             }
+            // If rows are deleted elsewhere, keep the selected slot valid.
             .onChange(of: products.count) { _, _ in
                 clampSelectedIndex()
             }
@@ -181,6 +187,7 @@ struct ContentView: View {
         }
     }
 
+    // Step through the sorted `products` array; disabled at the first/last item.
     private var navigationButtons: some View {
         HStack(spacing: AppTheme.Spacing.sm) {
             Button {
@@ -229,6 +236,7 @@ struct ContentView: View {
         }
     }
 
+    // Keeps `selectedIndex` in range after the add sheet closes or the fetch count drops.
     private func clampSelectedIndex() {
         let n = products.count
         guard n > 0 else { return }
