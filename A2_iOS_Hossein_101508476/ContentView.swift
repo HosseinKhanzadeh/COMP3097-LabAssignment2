@@ -45,12 +45,14 @@ struct ContentView: View {
                             primaryAction: { showingAddProduct = true }
                         )
                     } else {
-                        productCard(products[validSelectedIndex])
-                        navigationButtons
+                        VStack(spacing: AppTheme.Spacing.md) {
+                            productCard(products[validSelectedIndex])
+                            navigationButtons
+                        }
                     }
                 }
                 .appContentPadding()
-                .padding(.top, AppTheme.Spacing.md)
+                .padding(.top, AppTheme.Spacing.lg)
                 .padding(.bottom, AppTheme.Spacing.xxl)
             }
             .appScreenBackground()
@@ -66,7 +68,7 @@ struct ContentView: View {
                         showingAddProduct = true
                     }
                     .font(AppTheme.Typography.button15)
-                    .foregroundStyle(AppTheme.Colors.primaryText)
+                    .foregroundStyle(AppTheme.Colors.accentGreenBright)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
@@ -120,8 +122,8 @@ struct ContentView: View {
                 .font(AppTheme.Typography.metadataCaption)
                 .fontWeight(.semibold)
                 .foregroundStyle(AppTheme.Colors.accentGreenBright)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
+                .padding(.horizontal, AppTheme.Spacing.sm)
+                .padding(.vertical, AppTheme.Spacing.xxs)
                 .background(AppTheme.Colors.accentGreen.opacity(0.18))
                 .overlay(
                     Capsule()
@@ -130,7 +132,7 @@ struct ContentView: View {
                 .clipShape(Capsule())
 
             Text(product.name)
-                .font(.system(size: 22, weight: .semibold))
+                .font(AppTheme.Typography.cardTitle)
                 .foregroundStyle(AppTheme.Colors.primaryText)
                 .fixedSize(horizontal: false, vertical: true)
 
@@ -184,7 +186,7 @@ struct ContentView: View {
             Button {
                 selectedIndex = validSelectedIndex - 1
             } label: {
-                HStack(spacing: 6) {
+                HStack(spacing: AppTheme.Spacing.xs) {
                     Image(systemName: "chevron.left")
                     Text("Previous")
                 }
@@ -206,7 +208,7 @@ struct ContentView: View {
             Button {
                 selectedIndex = validSelectedIndex + 1
             } label: {
-                HStack(spacing: 6) {
+                HStack(spacing: AppTheme.Spacing.xs) {
                     Text("Next")
                     Image(systemName: "chevron.right")
                 }

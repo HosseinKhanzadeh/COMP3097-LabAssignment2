@@ -20,6 +20,7 @@ enum AppTheme {
     }
 
     enum Spacing {
+        static let xxs: CGFloat = 4
         static let xs: CGFloat = 8
         static let sm: CGFloat = 12
         static let md: CGFloat = 16
@@ -37,7 +38,9 @@ enum AppTheme {
 
     enum Typography {
         static let screenTitle = Font.system(size: 34, weight: .semibold)
+        static let cardTitle = Font.system(size: 22, weight: .semibold)
         static let rowTitle = Font.system(size: 17, weight: .semibold)
+        static let rowPrice = Font.system(size: 17, weight: .semibold)
         static let body15 = Font.system(size: 15, weight: .regular)
         static let button15 = Font.system(size: 15, weight: .medium)
         static let fieldLabel = Font.system(size: 14, weight: .medium)
@@ -46,8 +49,8 @@ enum AppTheme {
     }
 
     enum Shadow {
-        static let elevatedColor = Color.black.opacity(0.45)
-        static let elevatedRadius: CGFloat = 24
-        static let elevatedYOffset: CGFloat = 8
+        static let elevatedColor = Color.black.opacity(0.36)
+        static let elevatedRadius: CGFloat = 18
+        static let elevatedYOffset: CGFloat = 6
     }
 }

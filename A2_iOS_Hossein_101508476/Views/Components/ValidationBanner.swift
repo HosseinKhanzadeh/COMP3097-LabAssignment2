@@ -15,13 +15,14 @@ struct ValidationBanner: View {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundStyle(AppTheme.Colors.errorText)
                     .font(.system(size: 16, weight: .semibold))
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: AppTheme.Spacing.xxs) {
                     Text(title)
                         .font(AppTheme.Typography.fieldLabel)
                         .foregroundStyle(AppTheme.Colors.errorText)
                     Text(message)
                         .font(AppTheme.Typography.body15)
                         .foregroundStyle(AppTheme.Colors.errorText)
+                        .lineSpacing(2)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }

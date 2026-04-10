@@ -72,7 +72,7 @@ struct AddProductView: View {
                 infoHintCard
             }
             .appContentPadding()
-            .padding(.vertical, AppTheme.Spacing.md)
+            .padding(.vertical, AppTheme.Spacing.lg)
         }
         .appScreenBackground()
         .navigationTitle("")
@@ -80,6 +80,7 @@ struct AddProductView: View {
         .toolbarBackground(AppTheme.Colors.appBackground, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
+        .tint(AppTheme.Colors.accentGreenBright)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text("Add Product")
@@ -97,7 +98,7 @@ struct AddProductView: View {
                 Button("Save") {
                     saveProduct()
                 }
-                .font(.system(size: 17, weight: .semibold))
+                .font(AppTheme.Typography.rowTitle)
                 .foregroundStyle(AppTheme.Colors.accentGreenBright)
             }
         }
@@ -106,18 +107,18 @@ struct AddProductView: View {
 
     private var infoHintCard: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-            AccentGradientBar(width: 28, height: 2)
+            AccentGradientBar(width: 32, height: 2)
             Text("Entries are stored on this device only.")
                 .font(AppTheme.Typography.metadataCaption)
                 .foregroundStyle(AppTheme.Colors.bodyMuted)
         }
         .padding(AppTheme.Spacing.md)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppTheme.Colors.accentGreen.opacity(0.12))
+        .background(AppTheme.Colors.accentGreen.opacity(0.10))
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous)
-                .stroke(AppTheme.Colors.accentGreen.opacity(0.28), lineWidth: 1)
+                .stroke(AppTheme.Colors.accentGreen.opacity(0.24), lineWidth: 1)
         )
     }
 
@@ -171,8 +172,9 @@ struct AddProductView: View {
             .lineLimit(4...10)
             .foregroundStyle(AppTheme.Colors.primaryText)
             .font(AppTheme.Typography.body15)
+            .lineSpacing(2)
             .padding(AppTheme.Spacing.md)
-            .frame(minHeight: 120, alignment: .topLeading)
+            .frame(minHeight: 128, alignment: .topLeading)
             .appInputChrome(isFocused: focusedField == field)
         }
     }

@@ -55,7 +55,7 @@ struct ProductListView: View {
                         }
                     }
                     .appContentPadding()
-                    .padding(.top, AppTheme.Spacing.md)
+                    .padding(.top, AppTheme.Spacing.lg)
                     .padding(.bottom, AppTheme.Spacing.xxl)
                 }
                 .appScreenBackground()
@@ -142,7 +142,7 @@ struct ProductListView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(product.price, format: .currency(code: "USD"))
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(AppTheme.Typography.rowPrice)
                     .foregroundStyle(AppTheme.Colors.accentGreenBright)
             }
 
@@ -157,11 +157,11 @@ struct ProductListView: View {
                 .frame(height: 1)
                 .padding(.vertical, AppTheme.Spacing.xs)
 
-            HStack(alignment: .firstTextBaseline) {
+            HStack(alignment: .firstTextBaseline, spacing: AppTheme.Spacing.sm) {
                 Text(product.productId)
                     .font(AppTheme.Typography.metadataCaption)
                     .foregroundStyle(AppTheme.Colors.tertiaryText)
-                Spacer()
+                Spacer(minLength: AppTheme.Spacing.sm)
                 Text(product.provider)
                     .font(AppTheme.Typography.metadataCaption)
                     .foregroundStyle(AppTheme.Colors.secondaryText)
@@ -170,12 +170,7 @@ struct ProductListView: View {
         }
         .padding(AppTheme.Spacing.md)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppTheme.Colors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous)
-                .stroke(AppTheme.Colors.borderSubtle, lineWidth: 1)
-        )
+        .subtleBorderedSurface(cornerRadius: AppTheme.Radius.md)
     }
 
     private func refreshProducts() {

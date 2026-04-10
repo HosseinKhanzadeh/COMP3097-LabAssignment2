@@ -51,6 +51,7 @@ struct EmptyStateCard: View {
             Text(message)
                 .font(AppTheme.Typography.body15)
                 .foregroundStyle(AppTheme.Colors.secondaryText)
+                .lineSpacing(2)
                 .multilineTextAlignment(.center)
 
             if let primaryActionTitle, let primaryAction {
