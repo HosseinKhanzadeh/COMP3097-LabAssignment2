@@ -33,6 +33,15 @@ struct ContentView: View {
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Product App")
             .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        ProductListView()
+                    } label: {
+                        Text("View All Products")
+                    }
+                }
+            }
             .onAppear {
                 clampSelectedIndex()
             }
