@@ -8,6 +8,7 @@ struct ProductListView: View {
     @State private var displayedProducts: [Product] = []
     @State private var storeHasProducts = false
     @State private var hasLoadedOnce = false
+    @State private var showingAddProduct = false
 
     private var trimmedSearch: String {
         searchText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -46,16 +47,19 @@ struct ProductListView: View {
             }
         }
         .background(Color(.systemGroupedBackground))
-        .navigationTitle("All products")
+        .navigationTitle("All Products")
         .navigationBarTitleDisplayMode(.large)
         .searchable(text: $searchText, prompt: "Search name or description")
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                NavigationLink {
-                    AddProductView()
-                } label: {
-                    Text("Add Product")
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Add Product") {
+                    showingAddProduct = true
                 }
+            }
+        }
+        .sheet(isPresented: $showingAddProduct, onDismiss: refreshProducts) {
+            NavigationStack {
+                AddProductView()
             }
         }
         .onAppear(perform: refreshProducts)

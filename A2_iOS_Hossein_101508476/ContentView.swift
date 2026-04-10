@@ -44,11 +44,11 @@ struct ContentView: View {
                     NavigationLink {
                         ProductListView()
                     } label: {
-                        Text("View All Products")
+                        Text("All Products")
                     }
                 }
             }
-            .sheet(isPresented: $showingAddProduct) {
+            .sheet(isPresented: $showingAddProduct, onDismiss: clampSelectedIndex) {
                 NavigationStack {
                     AddProductView()
                 }
