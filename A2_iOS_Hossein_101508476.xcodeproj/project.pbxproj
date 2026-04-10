@@ -14,6 +14,7 @@
 		A11111110000000000000005 /* Product+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000005 /* Product+CoreDataClass.swift */; };
 		A11111110000000000000006 /* Product+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000006 /* Product+CoreDataProperties.swift */; };
 		A11111110000000000000007 /* ProductModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000007 /* ProductModel.xcdatamodeld */; };
+		A11111110000000000000009 /* ProductSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000008 /* ProductSeeder.swift */; };
 		A11111110000000000000008 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44444440000000000000002 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		A22222220000000000000005 /* Product+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A22222220000000000000006 /* Product+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A22222220000000000000007 /* ProductModel.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; path = ProductModel.xcdatamodeld; sourceTree = "<group>"; };
+		A22222220000000000000008 /* ProductSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSeeder.swift; sourceTree = "<group>"; };
 		A44444440000000000000002 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				A22222220000000000000004 /* PersistenceController.swift */,
+				A22222220000000000000008 /* ProductSeeder.swift */,
 				A22222220000000000000007 /* ProductModel.xcdatamodeld */,
 			);
 			path = Persistence;
@@ -178,6 +181,7 @@
 				A11111110000000000000005 /* Product+CoreDataClass.swift in Sources */,
 				A11111110000000000000006 /* Product+CoreDataProperties.swift in Sources */,
 				A11111110000000000000007 /* ProductModel.xcdatamodeld in Sources */,
+				A11111110000000000000009 /* ProductSeeder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

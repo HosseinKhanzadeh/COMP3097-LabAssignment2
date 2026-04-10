@@ -18,6 +18,7 @@ struct PersistenceController {
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
+            ProductSeeder.seedIfNeeded(context: container.viewContext)
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
