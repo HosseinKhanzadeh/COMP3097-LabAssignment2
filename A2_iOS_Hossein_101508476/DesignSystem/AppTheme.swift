@@ -6,7 +6,7 @@ enum AppTheme {
         static let surface = Color(hex: "1C1C1E")
         static let primaryText = Color(hex: "FFFFFF")
         static let secondaryText = Color(hex: "9CA3AF")
-        static let bodyMuted = Color(hex: "D1D5DB")
+        static let bodyMuted = Color(hex: "DDE1E7")
         static let tertiaryText = Color(hex: "6B7280")
         static let accentGreen = Color(hex: "16A34A")
         static let accentGreenBright = Color(hex: "22C55E")
@@ -47,6 +47,8 @@ enum AppTheme {
         static let fieldLabel = Font.system(size: 14, weight: .medium)
         static let emptyTitle = Font.system(size: 20, weight: .semibold)
         static let metadataCaption = Font.system(size: 12, weight: .regular)
+        static let iconInline = Font.system(size: 18, weight: .medium)
+        static let iconChevron = Font.system(size: 18, weight: .semibold)
     }
 
     enum Shadow {

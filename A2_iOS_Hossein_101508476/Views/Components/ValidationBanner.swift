@@ -14,7 +14,7 @@ struct ValidationBanner: View {
             HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundStyle(AppTheme.Colors.errorText)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(AppTheme.Typography.iconInline)
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.xxs) {
                     Text(title)
                         .font(AppTheme.Typography.fieldLabel)

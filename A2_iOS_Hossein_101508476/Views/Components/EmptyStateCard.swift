@@ -66,7 +66,7 @@ struct EmptyStateCard: View {
                         .background(AppTheme.Colors.accentGreen)
                         .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
                 }
-                .buttonStyle(.plain)
+                .appSubtlePressButtonStyle()
                 .padding(.top, AppTheme.Spacing.xs)
             }
         }

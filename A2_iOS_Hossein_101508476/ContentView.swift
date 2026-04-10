@@ -74,6 +74,7 @@ struct ContentView: View {
                     }
                     .font(AppTheme.Typography.button15)
                     .foregroundStyle(AppTheme.Colors.accentGreenBright)
+                    .appSubtlePressButtonStyle()
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
@@ -83,6 +84,7 @@ struct ContentView: View {
                             .font(AppTheme.Typography.button15)
                             .foregroundStyle(AppTheme.Colors.accentGreenBright)
                     }
+                    .appSubtlePressButtonStyle()
                 }
             }
             .sheet(isPresented: $showingAddProduct, onDismiss: clampSelectedIndex) {
@@ -148,10 +150,7 @@ struct ContentView: View {
                 .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Rectangle()
-                .fill(AppTheme.Colors.divider)
-                .frame(height: 1)
-                .padding(.vertical, AppTheme.Spacing.sm)
+            AppDividerLine()
 
             VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
                 metadataRow(
@@ -197,21 +196,22 @@ struct ContentView: View {
             } label: {
                 HStack(spacing: AppTheme.Spacing.xs) {
                     Image(systemName: "chevron.left")
+                        .font(AppTheme.Typography.iconChevron)
                     Text("Previous")
+                        .font(AppTheme.Typography.button15)
                 }
-                .font(AppTheme.Typography.button15)
+                .foregroundStyle(canGoPrevious ? AppTheme.Colors.primaryText : AppTheme.Colors.tertiaryText)
                 .padding(.horizontal, AppTheme.Spacing.sm)
                 .frame(maxWidth: .infinity)
                 .frame(height: 56)
+                .background(AppTheme.Colors.surface)
+                .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous)
+                        .stroke(AppTheme.Colors.borderSubtle, lineWidth: 1)
+                )
             }
-            .buttonStyle(.plain)
-            .foregroundStyle(canGoPrevious ? AppTheme.Colors.primaryText : AppTheme.Colors.tertiaryText)
-            .background(AppTheme.Colors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous)
-                    .stroke(AppTheme.Colors.borderSubtle, lineWidth: 1)
-            )
+            .appSubtlePressButtonStyle()
             .appDisabledLook(!canGoPrevious)
             .disabled(!canGoPrevious)
 
@@ -220,21 +220,22 @@ struct ContentView: View {
             } label: {
                 HStack(spacing: AppTheme.Spacing.xs) {
                     Text("Next")
+                        .font(AppTheme.Typography.button15)
                     Image(systemName: "chevron.right")
+                        .font(AppTheme.Typography.iconChevron)
                 }
-                .font(AppTheme.Typography.button15)
+                .foregroundStyle(canGoNext ? AppTheme.Colors.primaryText : AppTheme.Colors.tertiaryText)
                 .padding(.horizontal, AppTheme.Spacing.sm)
                 .frame(maxWidth: .infinity)
                 .frame(height: 56)
+                .background(canGoNext ? AppTheme.Colors.accentGreen : AppTheme.Colors.surface)
+                .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous)
+                        .stroke(canGoNext ? AppTheme.Colors.accentGreen.opacity(0.5) : AppTheme.Colors.borderSubtle, lineWidth: 1)
+                )
             }
-            .buttonStyle(.plain)
-            .foregroundStyle(canGoNext ? AppTheme.Colors.primaryText : AppTheme.Colors.tertiaryText)
-            .background(canGoNext ? AppTheme.Colors.accentGreen : AppTheme.Colors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous)
-                    .stroke(canGoNext ? AppTheme.Colors.accentGreen.opacity(0.5) : AppTheme.Colors.borderSubtle, lineWidth: 1)
-            )
+            .appSubtlePressButtonStyle()
             .appDisabledLook(!canGoNext)
             .disabled(!canGoNext)
         }

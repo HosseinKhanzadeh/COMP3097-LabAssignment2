@@ -75,6 +75,7 @@ struct ProductListView: View {
                 }
                 .font(AppTheme.Typography.button15)
                 .foregroundStyle(AppTheme.Colors.accentGreenBright)
+                .appSubtlePressButtonStyle()
             }
         }
         .sheet(isPresented: $showingAddProduct, onDismiss: refreshProducts) {
@@ -114,7 +115,7 @@ struct ProductListView: View {
     private var searchField: some View {
         HStack(spacing: AppTheme.Spacing.sm) {
             Image(systemName: "magnifyingglass")
-                .font(.system(size: 16, weight: .medium))
+                .font(AppTheme.Typography.iconInline)
                 .foregroundStyle(AppTheme.Colors.tertiaryText)
 
             TextField(
@@ -156,10 +157,7 @@ struct ProductListView: View {
                 .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Rectangle()
-                .fill(AppTheme.Colors.divider)
-                .frame(height: 1)
-                .padding(.vertical, AppTheme.Spacing.sm)
+            AppDividerLine()
 
             HStack(alignment: .firstTextBaseline, spacing: AppTheme.Spacing.md) {
                 Text(product.productId)

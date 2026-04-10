@@ -30,6 +30,26 @@ struct ElevatedCardModifier: ViewModifier {
     }
 }
 
+struct AppDividerLine: View {
+    var verticalPadding: CGFloat = AppTheme.Spacing.sm
+
+    var body: some View {
+        Rectangle()
+            .fill(AppTheme.Colors.divider)
+            .frame(height: 1)
+            .padding(.vertical, verticalPadding)
+    }
+}
+
+struct AppSubtlePressButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.985 : 1.0)
+            .opacity(configuration.isPressed ? 0.93 : 1.0)
+            .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
+    }
+}
+
 struct SubtleBorderedSurfaceModifier: ViewModifier {
     var cornerRadius: CGFloat = AppTheme.Radius.md
 
@@ -59,5 +79,9 @@ extension View {
 
     func subtleBorderedSurface(cornerRadius: CGFloat = AppTheme.Radius.md) -> some View {
         modifier(SubtleBorderedSurfaceModifier(cornerRadius: cornerRadius))
+    }
+
+    func appSubtlePressButtonStyle() -> some View {
+        buttonStyle(AppSubtlePressButtonStyle())
     }
 }

@@ -94,6 +94,7 @@ struct AddProductView: View {
                 }
                 .font(AppTheme.Typography.button15)
                 .foregroundStyle(AppTheme.Colors.secondaryText)
+                .appSubtlePressButtonStyle()
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button("Save") {
@@ -101,6 +102,7 @@ struct AddProductView: View {
                 }
                 .font(AppTheme.Typography.rowTitle)
                 .foregroundStyle(AppTheme.Colors.accentGreenBright)
+                .appSubtlePressButtonStyle()
             }
         }
         .preferredColorScheme(.dark)
