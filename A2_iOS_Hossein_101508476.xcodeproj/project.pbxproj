@@ -16,6 +16,7 @@
 		A11111110000000000000007 /* ProductModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000007 /* ProductModel.xcdatamodeld */; };
 		A11111110000000000000009 /* ProductSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000008 /* ProductSeeder.swift */; };
 		A11111110000000000000010 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000009 /* ProductListView.swift */; };
+		A11111110000000000000011 /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000010 /* AddProductView.swift */; };
 		A11111110000000000000008 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44444440000000000000002 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		A22222220000000000000007 /* ProductModel.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; path = ProductModel.xcdatamodeld; sourceTree = "<group>"; };
 		A22222220000000000000008 /* ProductSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSeeder.swift; sourceTree = "<group>"; };
 		A22222220000000000000009 /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
+		A22222220000000000000010 /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
 		A44444440000000000000002 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				A22222220000000000000009 /* ProductListView.swift */,
+				A22222220000000000000010 /* AddProductView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 				A11111110000000000000007 /* ProductModel.xcdatamodeld in Sources */,
 				A11111110000000000000009 /* ProductSeeder.swift in Sources */,
 				A11111110000000000000010 /* ProductListView.swift in Sources */,
+				A11111110000000000000011 /* AddProductView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

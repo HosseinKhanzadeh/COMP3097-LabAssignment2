@@ -13,6 +13,7 @@ struct ContentView: View {
     private var products: FetchedResults<Product>
 
     @State private var selectedIndex = 0
+    @State private var showingAddProduct = false
 
     private var validSelectedIndex: Int {
         let n = products.count
@@ -34,12 +35,22 @@ struct ContentView: View {
             .navigationTitle("Product App")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Add Product") {
+                        showingAddProduct = true
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
                         ProductListView()
                     } label: {
                         Text("View All Products")
                     }
+                }
+            }
+            .sheet(isPresented: $showingAddProduct) {
+                NavigationStack {
+                    AddProductView()
                 }
             }
             .onAppear {

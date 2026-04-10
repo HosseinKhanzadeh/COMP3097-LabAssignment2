@@ -49,9 +49,16 @@ struct ProductListView: View {
         .navigationTitle("All products")
         .navigationBarTitleDisplayMode(.large)
         .searchable(text: $searchText, prompt: "Search name or description")
-        .task {
-            refreshProducts()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                NavigationLink {
+                    AddProductView()
+                } label: {
+                    Text("Add Product")
+                }
+            }
         }
+        .onAppear(perform: refreshProducts)
         .onChange(of: searchText) { _, _ in
             refreshProducts()
         }
