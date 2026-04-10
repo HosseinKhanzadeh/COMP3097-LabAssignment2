@@ -19,7 +19,7 @@ struct EmptyStateCard: View {
         title: String,
         message: String,
         style: EmptyStateCardStyle = .flat,
-        verticalPadding: CGFloat = AppTheme.Spacing.xl,
+        verticalPadding: CGFloat = AppTheme.Spacing.xxl,
         primaryActionTitle: String? = nil,
         primaryAction: (() -> Void)? = nil
     ) {
@@ -33,7 +33,7 @@ struct EmptyStateCard: View {
     }
 
     var body: some View {
-        VStack(spacing: AppTheme.Spacing.md) {
+        VStack(spacing: AppTheme.Spacing.lg) {
             ZStack {
                 Circle()
                     .fill(Color.white.opacity(0.06))
@@ -43,16 +43,18 @@ struct EmptyStateCard: View {
                     .foregroundStyle(AppTheme.Colors.tertiaryText)
             }
 
-            Text(title)
-                .font(AppTheme.Typography.emptyTitle)
-                .foregroundStyle(AppTheme.Colors.primaryText)
-                .multilineTextAlignment(.center)
+            VStack(spacing: AppTheme.Spacing.md) {
+                Text(title)
+                    .font(AppTheme.Typography.emptyTitle)
+                    .foregroundStyle(AppTheme.Colors.primaryText)
+                    .multilineTextAlignment(.center)
 
-            Text(message)
-                .font(AppTheme.Typography.body15)
-                .foregroundStyle(AppTheme.Colors.secondaryText)
-                .lineSpacing(2)
-                .multilineTextAlignment(.center)
+                Text(message)
+                    .font(AppTheme.Typography.body15)
+                    .foregroundStyle(AppTheme.Colors.secondaryText)
+                    .lineSpacing(2)
+                    .multilineTextAlignment(.center)
+            }
 
             if let primaryActionTitle, let primaryAction {
                 Button(action: primaryAction) {
@@ -65,10 +67,11 @@ struct EmptyStateCard: View {
                         .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
                 }
                 .buttonStyle(.plain)
-                .padding(.top, AppTheme.Spacing.sm)
+                .padding(.top, AppTheme.Spacing.xs)
             }
         }
-        .padding(verticalPadding)
+        .padding(.vertical, verticalPadding)
+        .padding(.horizontal, AppTheme.Spacing.xl)
         .frame(maxWidth: .infinity)
         .modifier(EmptyStateCardContainerModifier(style: style))
     }

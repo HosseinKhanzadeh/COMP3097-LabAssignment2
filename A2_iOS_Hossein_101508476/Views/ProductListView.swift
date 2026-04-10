@@ -130,12 +130,13 @@ struct ProductListView: View {
             .font(AppTheme.Typography.body15)
         }
         .padding(.horizontal, AppTheme.Spacing.md)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .frame(height: 44)
         .appInputChrome(isFocused: searchFieldFocused)
     }
 
     private func productRowCard(_ product: Product) -> some View {
-        VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
+        VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
             HStack(alignment: .firstTextBaseline, spacing: AppTheme.Spacing.md) {
                 Text(product.name)
                     .font(AppTheme.Typography.rowTitle)
@@ -146,6 +147,7 @@ struct ProductListView: View {
                 Text(product.price, format: .currency(code: "USD"))
                     .font(AppTheme.Typography.rowPrice)
                     .foregroundStyle(AppTheme.Colors.accentGreenBright)
+                    .layoutPriority(1)
             }
 
             Text(product.productDescription)
@@ -157,13 +159,13 @@ struct ProductListView: View {
             Rectangle()
                 .fill(AppTheme.Colors.divider)
                 .frame(height: 1)
-                .padding(.vertical, AppTheme.Spacing.xs)
+                .padding(.vertical, AppTheme.Spacing.sm)
 
-            HStack(alignment: .firstTextBaseline, spacing: AppTheme.Spacing.sm) {
+            HStack(alignment: .firstTextBaseline, spacing: AppTheme.Spacing.md) {
                 Text(product.productId)
                     .font(AppTheme.Typography.metadataCaption)
                     .foregroundStyle(AppTheme.Colors.tertiaryText)
-                Spacer(minLength: AppTheme.Spacing.sm)
+                Spacer(minLength: AppTheme.Spacing.md)
                 Text(product.provider)
                     .font(AppTheme.Typography.metadataCaption)
                     .foregroundStyle(AppTheme.Colors.secondaryText)

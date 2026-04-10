@@ -34,6 +34,7 @@ enum AppTheme {
         static let sm: CGFloat = 12
         static let md: CGFloat = 16
         static let lg: CGFloat = 24
+        static let homeProductCard: CGFloat = 26
     }
 
     enum Typography {

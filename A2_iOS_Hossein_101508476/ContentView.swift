@@ -50,7 +50,7 @@ struct ContentView: View {
                             primaryAction: { showingAddProduct = true }
                         )
                     } else {
-                        VStack(spacing: AppTheme.Spacing.md) {
+                        VStack(spacing: AppTheme.Spacing.lg) {
                             productCard(products[validSelectedIndex])
                             navigationButtons
                         }
@@ -123,7 +123,7 @@ struct ContentView: View {
     }
 
     private func productCard(_ product: Product) -> some View {
-        VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
+        VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
             Text(product.productId)
                 .font(AppTheme.Typography.metadataCaption)
                 .fontWeight(.semibold)
@@ -151,24 +151,26 @@ struct ContentView: View {
             Rectangle()
                 .fill(AppTheme.Colors.divider)
                 .frame(height: 1)
-                .padding(.vertical, AppTheme.Spacing.xs)
+                .padding(.vertical, AppTheme.Spacing.sm)
 
-            metadataRow(
-                label: "Product Price",
-                value: priceText(product.price),
-                valueColor: AppTheme.Colors.accentGreenBright
-            )
-            metadataRow(
-                label: "Product Provider",
-                value: product.provider,
-                valueColor: AppTheme.Colors.primaryText
-            )
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
+                metadataRow(
+                    label: "Product Price",
+                    value: priceText(product.price),
+                    valueColor: AppTheme.Colors.accentGreenBright
+                )
+                metadataRow(
+                    label: "Product Provider",
+                    value: product.provider,
+                    valueColor: AppTheme.Colors.primaryText
+                )
+            }
         }
         .padding(AppTheme.Spacing.xl)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .elevatedProductCard()
+        .elevatedProductCard(cornerRadius: AppTheme.Radius.homeProductCard)
         .overlay(
-            RoundedRectangle(cornerRadius: AppTheme.Radius.lg, style: .continuous)
+            RoundedRectangle(cornerRadius: AppTheme.Radius.homeProductCard, style: .continuous)
                 .stroke(AppTheme.Colors.borderSubtle, lineWidth: 1)
         )
     }
@@ -198,6 +200,7 @@ struct ContentView: View {
                     Text("Previous")
                 }
                 .font(AppTheme.Typography.button15)
+                .padding(.horizontal, AppTheme.Spacing.sm)
                 .frame(maxWidth: .infinity)
                 .frame(height: 56)
             }
@@ -220,6 +223,7 @@ struct ContentView: View {
                     Image(systemName: "chevron.right")
                 }
                 .font(AppTheme.Typography.button15)
+                .padding(.horizontal, AppTheme.Spacing.sm)
                 .frame(maxWidth: .infinity)
                 .frame(height: 56)
             }
