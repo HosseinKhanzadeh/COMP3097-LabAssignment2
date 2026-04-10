@@ -33,9 +33,19 @@ struct ProductListView: View {
                         searchField
 
                         if !storeHasProducts {
-                            emptyStateNoProducts
+                            EmptyStateCard(
+                                icon: "cube.transparent",
+                                title: "No products available",
+                                message: "Products you add will appear here. Use Add Product to create one.",
+                                style: .flat
+                            )
                         } else if displayedProducts.isEmpty && !trimmedSearch.isEmpty {
-                            emptyStateNoMatches
+                            EmptyStateCard(
+                                icon: "magnifyingglass",
+                                title: "No matching products found",
+                                message: "Try a different search term.",
+                                style: .flat
+                            )
                         } else {
                             LazyVStack(spacing: AppTheme.Spacing.sm) {
                                 ForEach(displayedProducts, id: \.objectID) { product in
@@ -119,57 +129,7 @@ struct ProductListView: View {
         }
         .padding(.horizontal, AppTheme.Spacing.md)
         .frame(height: 44)
-        .background(AppTheme.Colors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: AppTheme.Radius.sm, style: .continuous)
-                .stroke(
-                    searchFieldFocused ? AppTheme.Colors.accentGreen : AppTheme.Colors.borderSubtle,
-                    lineWidth: searchFieldFocused ? 1.5 : 1
-                )
-        )
-    }
-
-    private var emptyStateNoProducts: some View {
-        emptyStateCard(
-            icon: "cube.transparent",
-            title: "No products available",
-            message: "Products you add will appear here. Use Add Product to create one."
-        )
-    }
-
-    private var emptyStateNoMatches: some View {
-        emptyStateCard(
-            icon: "magnifyingglass",
-            title: "No matching products found",
-            message: "Try a different search term."
-        )
-    }
-
-    private func emptyStateCard(icon: String, title: String, message: String) -> some View {
-        VStack(spacing: AppTheme.Spacing.md) {
-            Image(systemName: icon)
-                .font(.system(size: 40, weight: .light))
-                .foregroundStyle(AppTheme.Colors.tertiaryText)
-
-            Text(title)
-                .font(AppTheme.Typography.emptyTitle)
-                .foregroundStyle(AppTheme.Colors.primaryText)
-                .multilineTextAlignment(.center)
-
-            Text(message)
-                .font(AppTheme.Typography.body15)
-                .foregroundStyle(AppTheme.Colors.secondaryText)
-                .multilineTextAlignment(.center)
-        }
-        .padding(AppTheme.Spacing.xl)
-        .frame(maxWidth: .infinity)
-        .background(AppTheme.Colors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.lg, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: AppTheme.Radius.lg, style: .continuous)
-                .stroke(AppTheme.Colors.borderSubtle, lineWidth: 1)
-        )
+        .appInputChrome(isFocused: searchFieldFocused)
     }
 
     private func productRowCard(_ product: Product) -> some View {

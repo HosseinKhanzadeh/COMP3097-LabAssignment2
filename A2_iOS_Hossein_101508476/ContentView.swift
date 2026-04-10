@@ -36,7 +36,14 @@ struct ContentView: View {
                     homeHeader
 
                     if products.isEmpty {
-                        emptyStateCard
+                        EmptyStateCard(
+                            icon: "cube.transparent",
+                            title: "No products available",
+                            message: "Products you add will appear here. Use Add Product to create one.",
+                            style: .elevated,
+                            primaryActionTitle: "Add Product",
+                            primaryAction: { showingAddProduct = true }
+                        )
                     } else {
                         productCard(products[validSelectedIndex])
                         navigationButtons
@@ -105,44 +112,6 @@ struct ContentView: View {
                 .foregroundStyle(AppTheme.Colors.secondaryText)
                 .padding(.top, AppTheme.Spacing.xs)
         }
-    }
-
-    private var emptyStateCard: some View {
-        VStack(spacing: AppTheme.Spacing.md) {
-            Image(systemName: "cube.transparent")
-                .font(.system(size: 40, weight: .light))
-                .foregroundStyle(AppTheme.Colors.tertiaryText)
-
-            Text("No products available")
-                .font(AppTheme.Typography.emptyTitle)
-                .foregroundStyle(AppTheme.Colors.primaryText)
-                .multilineTextAlignment(.center)
-
-            Text("Products you add will appear here. Use Add Product to create one.")
-                .font(AppTheme.Typography.body15)
-                .foregroundStyle(AppTheme.Colors.secondaryText)
-                .multilineTextAlignment(.center)
-
-            Button {
-                showingAddProduct = true
-            } label: {
-                Text("Add Product")
-                    .font(AppTheme.Typography.button15)
-                    .foregroundStyle(AppTheme.Colors.primaryText)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, AppTheme.Spacing.sm)
-                    .background(AppTheme.Colors.accentGreen)
-                    .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
-            }
-            .padding(.top, AppTheme.Spacing.sm)
-        }
-        .padding(AppTheme.Spacing.xl)
-        .frame(maxWidth: .infinity)
-        .elevatedProductCard()
-        .overlay(
-            RoundedRectangle(cornerRadius: AppTheme.Radius.lg, style: .continuous)
-                .stroke(AppTheme.Colors.borderSubtle, lineWidth: 1)
-        )
     }
 
     private func productCard(_ product: Product) -> some View {
@@ -231,6 +200,7 @@ struct ContentView: View {
                 RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous)
                     .stroke(AppTheme.Colors.borderSubtle, lineWidth: 1)
             )
+            .appDisabledLook(!canGoPrevious)
             .disabled(!canGoPrevious)
 
             Button {
@@ -252,6 +222,7 @@ struct ContentView: View {
                 RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous)
                     .stroke(canGoNext ? AppTheme.Colors.accentGreen.opacity(0.5) : AppTheme.Colors.borderSubtle, lineWidth: 1)
             )
+            .appDisabledLook(!canGoNext)
             .disabled(!canGoNext)
         }
     }

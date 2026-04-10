@@ -26,7 +26,7 @@ struct AddProductView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
                 if let message = validationMessage {
-                    validationBanner(message)
+                    ValidationBanner(message: message)
                 }
 
                 labeledSingleLineField(
@@ -104,26 +104,6 @@ struct AddProductView: View {
         .preferredColorScheme(.dark)
     }
 
-    private func validationBanner(_ message: String) -> some View {
-        HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
-            Image(systemName: "exclamationmark.triangle.fill")
-                .foregroundStyle(AppTheme.Colors.errorText)
-                .font(.system(size: 16, weight: .semibold))
-            Text(message)
-                .font(AppTheme.Typography.body15)
-                .foregroundStyle(AppTheme.Colors.errorText)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(AppTheme.Spacing.md)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppTheme.Colors.errorBackground)
-        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous)
-                .stroke(AppTheme.Colors.errorBorder, lineWidth: 1)
-        )
-    }
-
     private var infoHintCard: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
             AccentGradientBar(width: 28, height: 2)
@@ -166,15 +146,7 @@ struct AddProductView: View {
             .font(AppTheme.Typography.body15)
             .padding(.horizontal, AppTheme.Spacing.md)
             .frame(height: 48)
-            .background(AppTheme.Colors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: AppTheme.Radius.sm, style: .continuous)
-                    .stroke(
-                        focusedField == field ? AppTheme.Colors.accentGreen : AppTheme.Colors.borderSubtle,
-                        lineWidth: focusedField == field ? 1.5 : 1
-                    )
-            )
+            .appInputChrome(isFocused: focusedField == field)
         }
     }
 
@@ -201,15 +173,7 @@ struct AddProductView: View {
             .font(AppTheme.Typography.body15)
             .padding(AppTheme.Spacing.md)
             .frame(minHeight: 120, alignment: .topLeading)
-            .background(AppTheme.Colors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: AppTheme.Radius.sm, style: .continuous)
-                    .stroke(
-                        focusedField == field ? AppTheme.Colors.accentGreen : AppTheme.Colors.borderSubtle,
-                        lineWidth: focusedField == field ? 1.5 : 1
-                    )
-            )
+            .appInputChrome(isFocused: focusedField == field)
         }
     }
 
