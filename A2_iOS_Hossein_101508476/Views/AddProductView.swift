@@ -12,40 +12,204 @@ struct AddProductView: View {
     @State private var provider = ""
     @State private var validationMessage: String?
 
-    var body: some View {
-        Form {
-            Section {
-                TextField("Product ID", text: $productId)
-                    .textInputAutocapitalization(.never)
-                TextField("Product Name", text: $name)
-                TextField("Product Description", text: $productDescription, axis: .vertical)
-                    .lineLimit(4...8)
-                TextField("Product Price", text: $priceText)
-                    .keyboardType(.decimalPad)
-                TextField("Product Provider", text: $provider)
-            }
+    @FocusState private var focusedField: FocusField?
 
-            if let message = validationMessage {
-                Section {
-                    Text(message)
-                        .foregroundStyle(.red)
-                        .font(.subheadline)
+    private enum FocusField: Hashable {
+        case productId
+        case name
+        case productDescription
+        case price
+        case provider
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
+                if let message = validationMessage {
+                    validationBanner(message)
                 }
+
+                labeledSingleLineField(
+                    label: "Product ID",
+                    prompt: "Enter product ID",
+                    text: $productId,
+                    field: .productId,
+                    autocap: .never
+                )
+
+                labeledSingleLineField(
+                    label: "Product Name",
+                    prompt: "Enter product name",
+                    text: $name,
+                    field: .name,
+                    autocap: .words
+                )
+
+                labeledMultilineField(
+                    label: "Product Description",
+                    prompt: "Describe the product",
+                    text: $productDescription,
+                    field: .productDescription
+                )
+
+                labeledSingleLineField(
+                    label: "Product Price",
+                    prompt: "0.00",
+                    text: $priceText,
+                    field: .price,
+                    keyboard: .decimalPad,
+                    autocap: .never
+                )
+
+                labeledSingleLineField(
+                    label: "Product Provider",
+                    prompt: "Enter provider name",
+                    text: $provider,
+                    field: .provider,
+                    autocap: .words
+                )
+
+                infoHintCard
             }
+            .appContentPadding()
+            .padding(.vertical, AppTheme.Spacing.md)
         }
-        .navigationTitle("Add Product")
+        .appScreenBackground()
+        .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(AppTheme.Colors.appBackground, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Add Product")
+                    .font(AppTheme.Typography.rowTitle)
+                    .foregroundStyle(AppTheme.Colors.primaryText)
+            }
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") {
                     dismiss()
                 }
+                .font(AppTheme.Typography.button15)
+                .foregroundStyle(AppTheme.Colors.secondaryText)
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button("Save") {
                     saveProduct()
                 }
+                .font(.system(size: 17, weight: .semibold))
+                .foregroundStyle(AppTheme.Colors.accentGreenBright)
             }
+        }
+        .preferredColorScheme(.dark)
+    }
+
+    private func validationBanner(_ message: String) -> some View {
+        HStack(alignment: .top, spacing: AppTheme.Spacing.sm) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundStyle(AppTheme.Colors.errorText)
+                .font(.system(size: 16, weight: .semibold))
+            Text(message)
+                .font(AppTheme.Typography.body15)
+                .foregroundStyle(AppTheme.Colors.errorText)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(AppTheme.Spacing.md)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(AppTheme.Colors.errorBackground)
+        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous)
+                .stroke(AppTheme.Colors.errorBorder, lineWidth: 1)
+        )
+    }
+
+    private var infoHintCard: some View {
+        VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
+            AccentGradientBar(width: 28, height: 2)
+            Text("Entries are stored on this device only.")
+                .font(AppTheme.Typography.metadataCaption)
+                .foregroundStyle(AppTheme.Colors.bodyMuted)
+        }
+        .padding(AppTheme.Spacing.md)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(AppTheme.Colors.accentGreen.opacity(0.12))
+        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppTheme.Radius.md, style: .continuous)
+                .stroke(AppTheme.Colors.accentGreen.opacity(0.28), lineWidth: 1)
+        )
+    }
+
+    private func labeledSingleLineField(
+        label: String,
+        prompt: String,
+        text: Binding<String>,
+        field: FocusField,
+        keyboard: UIKeyboardType = .default,
+        autocap: TextInputAutocapitalization
+    ) -> some View {
+        VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
+            Text(label)
+                .font(AppTheme.Typography.fieldLabel)
+                .foregroundStyle(AppTheme.Colors.secondaryText)
+
+            TextField(
+                "",
+                text: text,
+                prompt: Text(prompt).foregroundStyle(AppTheme.Colors.tertiaryText)
+            )
+            .focused($focusedField, equals: field)
+            .keyboardType(keyboard)
+            .textInputAutocapitalization(autocap)
+            .foregroundStyle(AppTheme.Colors.primaryText)
+            .font(AppTheme.Typography.body15)
+            .padding(.horizontal, AppTheme.Spacing.md)
+            .frame(height: 48)
+            .background(AppTheme.Colors.surface)
+            .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: AppTheme.Radius.sm, style: .continuous)
+                    .stroke(
+                        focusedField == field ? AppTheme.Colors.accentGreen : AppTheme.Colors.borderSubtle,
+                        lineWidth: focusedField == field ? 1.5 : 1
+                    )
+            )
+        }
+    }
+
+    private func labeledMultilineField(
+        label: String,
+        prompt: String,
+        text: Binding<String>,
+        field: FocusField
+    ) -> some View {
+        VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
+            Text(label)
+                .font(AppTheme.Typography.fieldLabel)
+                .foregroundStyle(AppTheme.Colors.secondaryText)
+
+            TextField(
+                "",
+                text: text,
+                axis: .vertical,
+                prompt: Text(prompt).foregroundStyle(AppTheme.Colors.tertiaryText)
+            )
+            .focused($focusedField, equals: field)
+            .lineLimit(4...10)
+            .foregroundStyle(AppTheme.Colors.primaryText)
+            .font(AppTheme.Typography.body15)
+            .padding(AppTheme.Spacing.md)
+            .frame(minHeight: 120, alignment: .topLeading)
+            .background(AppTheme.Colors.surface)
+            .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.sm, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: AppTheme.Radius.sm, style: .continuous)
+                    .stroke(
+                        focusedField == field ? AppTheme.Colors.accentGreen : AppTheme.Colors.borderSubtle,
+                        lineWidth: focusedField == field ? 1.5 : 1
+                    )
+            )
         }
     }
 
@@ -112,4 +276,5 @@ struct AddProductView: View {
         AddProductView()
     }
     .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    .preferredColorScheme(.dark)
 }
