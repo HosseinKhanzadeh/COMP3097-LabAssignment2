@@ -10,6 +10,11 @@
 		A11111110000000000000001 /* A2_iOS_Hossein_101508476App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000001 /* A2_iOS_Hossein_101508476App.swift */; };
 		A11111110000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000002 /* ContentView.swift */; };
 		A11111110000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000003 /* Assets.xcassets */; };
+		A11111110000000000000004 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000004 /* PersistenceController.swift */; };
+		A11111110000000000000005 /* Product+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000005 /* Product+CoreDataClass.swift */; };
+		A11111110000000000000006 /* Product+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000006 /* Product+CoreDataProperties.swift */; };
+		A11111110000000000000007 /* ProductModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A22222220000000000000007 /* ProductModel.xcdatamodeld */; };
+		A11111110000000000000008 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44444440000000000000002 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +22,11 @@
 		A22222220000000000000001 /* A2_iOS_Hossein_101508476App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A2_iOS_Hossein_101508476App.swift; sourceTree = "<group>"; };
 		A22222220000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A22222220000000000000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A22222220000000000000004 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		A22222220000000000000005 /* Product+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A22222220000000000000006 /* Product+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A22222220000000000000007 /* ProductModel.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; path = ProductModel.xcdatamodeld; sourceTree = "<group>"; };
+		A44444440000000000000002 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A11111110000000000000008 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +74,8 @@
 		A55555550000000000000004 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A22222220000000000000005 /* Product+CoreDataClass.swift */,
+				A22222220000000000000006 /* Product+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -84,6 +97,8 @@
 		A55555550000000000000007 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				A22222220000000000000004 /* PersistenceController.swift */,
+				A22222220000000000000007 /* ProductModel.xcdatamodeld */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -159,6 +174,10 @@
 			files = (
 				A11111110000000000000001 /* A2_iOS_Hossein_101508476App.swift in Sources */,
 				A11111110000000000000002 /* ContentView.swift in Sources */,
+				A11111110000000000000004 /* PersistenceController.swift in Sources */,
+				A11111110000000000000005 /* Product+CoreDataClass.swift in Sources */,
+				A11111110000000000000006 /* Product+CoreDataProperties.swift in Sources */,
+				A11111110000000000000007 /* ProductModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
